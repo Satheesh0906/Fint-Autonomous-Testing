@@ -6,7 +6,8 @@ const logger = require('../../../logger');
 const { codeConfig } = require('../../../codecept.conf.api');
 
 // Ensure codeConfig and helpers.rest.endpoint are defined
-const baseUrl = codeConfig?.helpers?.rest?.endpoint || 'https://petstore.swagger.io/v2';
+const baseUrl =
+	codeConfig?.helpers?.rest?.endpoint || 'https://petstore.swagger.io/v2';
 
 // Initialize the project root directory
 global.projectRoot = path.resolve(__dirname, '../../..').toString(); // Adjust the path as needed
@@ -193,7 +194,9 @@ async function swaggerApiTestGenerator(swaggerUrl, customBaseDir = apiDir) {
 }
 
 // Ensure codeConfig and custom property are defined
-const swaggerUrl = codeConfig?.custom?.swaggerUrl || 'https://petstore.swagger.io/v2/swagger.json';
+const swaggerUrl =
+	codeConfig?.custom?.swaggerUrl ||
+	'https://petstore.swagger.io/v2/swagger.json';
 
 // Example usage
 swaggerApiTestGenerator(swaggerUrl);

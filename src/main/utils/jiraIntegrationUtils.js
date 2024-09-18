@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const config = require('../../../config');
+const log4js = require('log4js');
 const FormData = require('form-data');
 const { initializeOpenAI } = require('./openaiUtils');
 
@@ -10,6 +11,18 @@ const JIRA_API_KEY = config.zapiBearerToken;
 let testCycleId = null;
 let testCycleKey = null;
 
+async function logInfo(logVal) {
+	log4js.configure({
+		appenders: {
+			console: { type: 'console' }, // Log to console
+			file: { type: 'file', filename: 'logs/FAT.log' }, // Log to a file
+		},
+		categories: {
+			default: { appenders: ['console', 'file'], level: 'info' },
+		},
+	});
+	log4js.getLogger('FAT').info(logVal);
+}
 async function createTestCycle() {
 	if (testCycleId && testCycleKey) {
 		return { testCycleId, testCycleKey };
@@ -113,6 +126,10 @@ async function getTestSteps(testScriptUrl) {
 	try {
 		const response = await axios.get(testScriptUrl, {
 			headers: getJiraHeaders(),
+			params: {
+				maxResults: 50,
+				startAt: 0,
+			},
 		});
 		return response.data.values;
 	} catch (error) {
@@ -237,4 +254,5 @@ module.exports = {
 	getJiraIssue,
 	getUserStoryDetails,
 	generateAutomationCodeForTestCase,
+	logInfo,
 };

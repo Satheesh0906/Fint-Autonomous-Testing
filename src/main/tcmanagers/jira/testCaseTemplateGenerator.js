@@ -26,6 +26,10 @@ async function getTestSteps(testScriptUrl) {
 			Authorization: `Bearer ${config.zapiBearerToken}`,
 			'Content-Type': 'application/json',
 		},
+		params: {
+			maxResults: 50,
+			startAt: 0,
+		},
 	});
 
 	console.log(response.data);
@@ -157,7 +161,7 @@ async function generateTestCaseTemplates(
 				});
 
 				const prompt = `
-                Generate only CodeceptJS testcase steps code with await command before for the each line and add step prints with I.logInfo step details with but don't create a scenario and block with out any comments. :
+           Generate only CodeceptJS testcase with but don't create a scenario and block with out any comments. :
                 Test Steps:
                 ${testSteps.map((step, index) => `${index + 1}. ${step.inline.description}`).join('\n')}
                 `;
@@ -181,14 +185,8 @@ async function generateTestCaseTemplates(
 
 					testFileContent += `
                         Scenario('${testCaseKey}_${testCase.name}', async ({ I }) => {
-                            let testCaseId = '${testCaseKey}';
-                        
-                            try {
-                                    ${generatedCode}
-                                    await updateTestCaseStatus(testCycleKey, testCaseId, "Pass", "Test passed successfully");
-                            } catch (error) {
-                                    await updateTestCaseStatus(testCycleKey, testCaseId, "Fail", \`Test failed with error: \${error.message}\`);
-                            }
+                             global.testCaseId = '${testCaseKey}';
+                                    ${generatedCode}    
                         });
                     `;
 				} else {

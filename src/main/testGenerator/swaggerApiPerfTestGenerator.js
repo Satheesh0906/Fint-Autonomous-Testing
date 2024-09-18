@@ -217,5 +217,7 @@ async function generateK6PerformanceTests(swaggerUrl, customBaseDir = apiDir) {
 	}
 }
 
-const swaggerUrl = codeConfig?.custom?.swaggerUrl || 'https://petstore.swagger.io/v2/swagger.json';
+const swaggerUrl =
+	codeConfig?.custom?.swaggerUrl ||
+	'https://petstore.swagger.io/v2/swagger.json';
 generateK6PerformanceTests(swaggerUrl);

@@ -12,7 +12,7 @@ exports.config = {
 	helpers: {
 		Playwright: {
 			url: '',
-			show: false,
+			show: true,
 			windowSize: '1200x900',
 			browser: 'chromium',
 			waitForNavigation: 'domcontentloaded',
