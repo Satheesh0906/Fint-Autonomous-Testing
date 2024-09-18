@@ -1,0 +1,11 @@
+{
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,  // Support for ES6 and newer
+    "sourceType": "module"  // Allow 'import' and 'export'
+  }
+
+}
