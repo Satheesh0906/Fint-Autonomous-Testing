@@ -13,15 +13,40 @@ exports.config = {
 		Playwright: {
 			url: '',
 			show: true,
-			windowSize: '1200x900',
+			windowSize: '1000X600',
 			browser: 'chromium',
+			//channel: 'msedge',
+			waitForNavigation: 'load',
 			waitForNavigation: 'domcontentloaded',
-			waitForAction: 200,
-			getPageTimeout: 10000,
-			waitForTimeout: 10000,
+			waitForNavigation: 'commit',
+			waitForAction: 1000,
+			getPageTimeout: 100000,
+			waitForTimeout: 100000,
 			video: true,
 			trace: true,
+			smartWait: 10000,
+			highlightElement: true,
+			chromium: {
+				args: [
+					'--no-sandbox', // Disables sandboxing
+					'--disable-gpu', // Disables GPU hardware acceleration
+					// '--headless',                   // Runs the browser in headless mode
+					'--window-size=1000,600', // Sets the initial window size
+					'--disable-dev-shm-usage', // Avoids potential issues with shared memory
+					'--disable-extensions', // Disables extensions
+					'--incognito', // Opens browser in incognito mode
+					'--disable-notifications', // Disables browser notifications
+					'--disable-infobars', // Disables info bars
+					'--ignore-certificate-errors', // Ignores SSL certificate errors
+					'--disable-popup-blocking', // Disables popup blocking
+					'--deny-permission-prompts', // Denies all permission prompts
+					'--suppress-message-center-popups',
+				],
+			},
+			bypassCSP: true,
 		},
+		ExpectHelper: {},
+		FileSystem: {},
 		AI: {},
 		PlaywrightCustomHelper: {
 			require: './src/main/helpers/playwright_helper.js',
