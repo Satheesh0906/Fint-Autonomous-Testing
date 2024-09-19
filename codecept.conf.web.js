@@ -45,7 +45,7 @@ exports.config = {
 			},
 			bypassCSP: true,
 		},
-		ExpectHelper: {},
+		SoftExpectHelper: {},
 		FileSystem: {},
 		AI: {},
 		PlaywrightCustomHelper: {
