@@ -161,7 +161,7 @@ async function generateTestCaseTemplates(
 				});
 
 				const prompt = `
-           Generate only CodeceptJS testcase with but don't create a scenario and block with out any comments. :
+           Generate a CodeceptJS test case with steps, without creating a scenario or block, and without comments. :
                 Test Steps:
                 ${testSteps.map((step, index) => `${index + 1}. ${step.inline.description}`).join('\n')}
                 `;
